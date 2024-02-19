@@ -313,10 +313,10 @@ def pregunta_09():
                         
         temp = sorted(temp, key=lambda x: x[0])
 
-        values = []
+        values = {}
         for k, g in groupby(temp, lambda x: x[0]):
             value = sum([x[1] for x in g])
-            values.append((k, value))
+            values[k] = value
     
     return values
 
@@ -379,10 +379,10 @@ def pregunta_11():
 
         temp = sorted(temp, key=lambda x: x[0])
 
-        values_count = []
+        values_count = {}
         for k, g in groupby(temp, lambda x: x[0]):
             value = sum([x[1] for x in g])
-            values_count.append((k, value))
+            values_count[k] = value
 
     return values_count
 
@@ -413,9 +413,9 @@ def pregunta_12():
                         
         temp = sorted(temp, key=lambda x: x[0])
 
-        values_count = []
+        values_count = {}
         for k, g in groupby(temp, lambda x: x[0]):
             value = sum([x[1] for x in g])
-            values_count.append((k, value))
+            values_count[k] = value
 
     return values_count
