@@ -9,6 +9,8 @@ básicas.
 
 Utilice el archivo `data.csv` para resolver las preguntas.
 
+Elaborado por: Catalina Restrepo Salgado
+
 
 """
 from itertools import groupby
