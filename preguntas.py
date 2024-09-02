@@ -9,9 +9,11 @@ básicas.
 
 Utilice el archivo `data.csv` para resolver las preguntas.
 
+Elaborado por: Catalina Restrepo Salgado
+
 
 """
-
+from itertools import groupby
 
 def pregunta_01():
     """
@@ -21,7 +23,12 @@ def pregunta_01():
     214
 
     """
-    return
+    with open("data.csv", "r") as data:
+        sum = 0
+        for line in data:
+            sum += int(line.split()[1])
+
+    return sum
 
 
 def pregunta_02():
@@ -39,7 +46,20 @@ def pregunta_02():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            letter = line.split()[0]
+            temp.append((letter, 1))
+
+        temp = sorted(temp, key=lambda x: x[0])
+
+        letter_count = []
+        for k, g in groupby(temp, lambda x: x[0]):
+            value = sum([x[1] for x in g])
+            letter_count.append((k, value))
+
+    return letter_count
 
 
 def pregunta_03():
@@ -57,7 +77,21 @@ def pregunta_03():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            letter = line.split()[0]
+            number = int(line.split()[1])
+            temp.append((letter, number))
+
+        temp = sorted(temp, key=lambda x: x[0])
+
+        values_count = []
+        for k, g in groupby(temp, lambda x: x[0]):
+            value = sum([x[1] for x in g])
+            values_count.append((k, value))
+
+    return values_count
 
 
 def pregunta_04():
@@ -82,7 +116,21 @@ def pregunta_04():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            month = line.split()[2]
+            month = month.split("-")[1]
+            temp.append((month, 1))
+
+        temp = sorted(temp, key=lambda x: x[0])
+
+        values_count = []
+        for k, g in groupby(temp, lambda x: x[0]):
+            value = sum([x[1] for x in g])
+            values_count.append((k, value))
+
+    return values_count
 
 
 def pregunta_05():
@@ -100,7 +148,21 @@ def pregunta_05():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            letter = line.split()[0]
+            number = int(line.split()[1])
+            temp.append((letter, number))
+
+        temp = sorted(temp, key=lambda x: x[0])
+
+        values = []
+        for k, g in groupby(temp, lambda x: x[0]):
+            list = [x[1] for x in g]
+            values.append((k, max(list), min(list)))
+
+    return values
 
 
 def pregunta_06():
@@ -125,7 +187,22 @@ def pregunta_06():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            dict = line.split()[4].split(",")
+            for element in dict:
+                element = element.split(":")
+                temp.append((element[0], int(element[1])))
+                        
+        temp = sorted(temp, key=lambda x: x[0])
+
+        values = []
+        for k, g in groupby(temp, lambda x: x[0]):
+            list = [x[1] for x in g]
+            values.append((k, min(list), max(list)))
+    
+    return values
 
 
 def pregunta_07():
@@ -149,7 +226,21 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            letter = line.split()[0]
+            number = int(line.split()[1])
+            temp.append((number, letter))
+
+        temp = sorted(temp, key=lambda x: x[0])
+
+        letters = []
+        for k, g in groupby(temp, lambda x: x[0]):
+            list = [x[1] for x in g]
+            letters.append((k, list))
+
+    return letters
 
 
 def pregunta_08():
@@ -174,7 +265,24 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            letter = line.split()[0]
+            number = int(line.split()[1])
+            temp.append((number, letter))
+
+        temp = sorted(temp, key=lambda x: (x[0], x[1]))
+
+        letters = []
+        for k, g in groupby(temp, lambda x: x[0]):
+            list = []
+            for x in g:
+                if x[1] not in list:
+                    list.append(x[1])
+            letters.append((k, list))
+
+    return letters
 
 
 def pregunta_09():
@@ -197,7 +305,22 @@ def pregunta_09():
     }
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            dict = line.split()[4].split(",")
+            for element in dict:
+                element = element.split(":")
+                temp.append((element[0], 1))
+                        
+        temp = sorted(temp, key=lambda x: x[0])
+
+        values = {}
+        for k, g in groupby(temp, lambda x: x[0]):
+            value = sum([x[1] for x in g])
+            values[k] = value
+    
+    return values
 
 
 def pregunta_10():
@@ -218,7 +341,16 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", "r") as data:
+        values = []
+        for line in data:
+            letter = line.split()[0]
+            column_four = line.split()[3].split(",")
+            column_five = line.split()[4].split(",")
+            
+            values.append((letter, len(column_four), len(column_five)))
+                        
+    return values
 
 
 def pregunta_11():
@@ -239,7 +371,22 @@ def pregunta_11():
 
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            letters = line.split()[3].split(",")
+            number = int(line.split()[1])
+            for letter in letters:
+                temp.append((letter, number))
+
+        temp = sorted(temp, key=lambda x: x[0])
+
+        values_count = {}
+        for k, g in groupby(temp, lambda x: x[0]):
+            value = sum([x[1] for x in g])
+            values_count[k] = value
+
+    return values_count
 
 
 def pregunta_12():
@@ -257,4 +404,20 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("data.csv", "r") as data:
+        temp = []
+        for line in data:
+            letter = line.split()[0]
+            dict = line.split()[4].split(",")
+            for element in dict:
+                element = element.split(":")
+                temp.append((letter, int(element[1])))
+                        
+        temp = sorted(temp, key=lambda x: x[0])
+
+        values_count = {}
+        for k, g in groupby(temp, lambda x: x[0]):
+            value = sum([x[1] for x in g])
+            values_count[k] = value
+
+    return values_count
